@@ -1,0 +1,40 @@
+<style>
+   
+    .center {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+    </style>
+
+<body>
+<div class="center">
+    <p-panel>
+    <p-header style="font-size: large; font-weight: bold; color: rgb(21, 177, 164);">LOGIN</p-header>
+    <div *ngIf = "!correct">
+        <h4 style="color: crimson; left: 50%;">
+            User Id or Password is incorrect
+        </h4>
+    </div>
+    <form [formGroup]="form" (ngSubmit) = "check()">
+        <div>
+            <label for="User Id" style="font-weight: bold;">User Id</label><br><br>
+            <input id="User Id" type="text" pInputText formControlName= "user_id"> 
+            <div *ngIf="!form.get('user_id').valid && submitted" style="color: red;" >User Id is required</div>
+        </div>
+        <br>
+        <div>
+            <label for="User Id" style="font-weight: bold;">Password</label><br><br>
+            <input id="User Id" type="password" pInputText formControlName= "password"> 
+            <div *ngIf="!form.get('password').valid && submitted" style="color: red;" >Password is required</div>
+        </div>
+        <br>
+        <span><button pButton type="submit" label="Submit"></button></span>
+        <span><p-button label="Signup" styleClass="p-button-link" routerLink="/signup"></p-button></span>
+    </form>
+    </p-panel>
+</div>
+</body>

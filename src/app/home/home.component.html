@@ -1,0 +1,78 @@
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io();
+</script>
+
+<div>
+    <mat-toolbar style="font-size: 40px; color: white; text-align: center;" color="primary">
+        <span style="flex: 1 1 auto; text-align: left;">Text App</span>
+        <span>&nbsp;</span>
+        <span style="color: rgb(197, 97, 147); font-size: 20px;">{{userid}}</span>
+        <span>&nbsp;</span>
+        <span><button mat-icon-button label="Logout" style="color: cornsilk;" routerLink="/login" ><mat-icon>exit_to_app</mat-icon></button></span>
+    </mat-toolbar>
+    <mat-sidenav-container class="example-container">
+      <div>
+      </div>
+        <mat-sidenav opened mode="side" style="width: 200px; height: 100%;">
+            
+            <mat-form-field>
+                <!-- <span><mat-icon>search</mat-icon></span>
+                <span>&nbsp;</span> -->
+                <div style="margin-top: 14px;margin-left: 16px; border: 1px black;"><input matInput [placeholder]="'Search...'" type="search" (keyup)="search()" [(ngModel)]="srch"></div>
+            </mat-form-field>
+            <button mat-raised-button color="warn" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size: large;font-weight: bold; margin-left: 15px;margin-top: 7px;" (click)="addgroup()">ADD GROUP</button>
+            <div *ngIf="!bs.search">
+            <mat-selection-list #items [multiple]="false">
+                <mat-list-option *ngFor="let grp of groups"  (click)="clickgroup(grp)" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-weight: bold; font-size: large;">
+                    <span *ngIf="shorten(grp)">{{short_name}}
+                    
+                        <button style="position: absolute; left: 140px; bottom: 4px;" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item (click)="delete(grp)">Delete</button>
+                        </mat-menu>
+                    
+                    </span>
+                    <mat-divider></mat-divider>
+                </mat-list-option>
+            </mat-selection-list>
+            </div>
+            <div *ngIf="bs.search">
+                <mat-selection-list #items [multiple]="false" >
+                    <div>
+                    <mat-list-option *ngFor="let grp of sgroups"  (click)="clickgroup(grp)" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-weight: bold; font-size: large;">
+                        <span *ngIf="shorten(grp)">{{short_name}}
+                    
+                            <button style="position: absolute; left: 140px; bottom: 4px;" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item (click)="delete(grp)" >Delete</button>
+                            </mat-menu>
+                        
+                        </span>
+                        <mat-divider></mat-divider>
+                    </mat-list-option>
+                    </div>
+                </mat-selection-list>
+            </div>
+            <!-- <mat-sidenav-list>
+                <p>
+                    Tere bin
+                </p>
+            </mat-sidenav-list> -->
+        </mat-sidenav>
+    
+        <mat-sidenav-content>
+            <div style="overflow: hidden;">
+                <app-folders [Grp]="currgrp" [uid]="userid"></app-folders>
+            </div>
+        </mat-sidenav-content>
+        <mat-sidenav *ngIf="bs.gi" opened mode="side" position="end" style="width: 200px; overflow-x: hidden;">
+            <app-group-info [group]="currgrp"></app-group-info>
+        </mat-sidenav>
+      
+    </mat-sidenav-container>
+    </div>

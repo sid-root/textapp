@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Your Group</h1>
+<div mat-dialog-content>
+    <mat-form-field>
+        <mat-label>Name Of Group:</mat-label>
+        <input matInput [placeholder]="'Enter Name of ur Group'" [(ngModel)]="grp.name" required>
+    </mat-form-field>
+    <br><br>
+    <mat-form-field>
+        <mat-label>Group Description:</mat-label>
+        <textarea matInput [placeholder]="'About the Group'" [(ngModel)]="grp.description"></textarea>
+    </mat-form-field>
+    <br><br>
+    <button mat-raised-button color="warn" mat-dialog-close [disabled]="!check()" cdkFocusInitial>Done</button>
+    <span>&nbsp;</span><span>&nbsp;</span>
+    <button mat-raised-button color="primary" mat-dialog-close cdkFocusInitial (click)="cancel()">Cancel</button>
+</div>

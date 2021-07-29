@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Your Folder</h1>
+<div mat-dialog-content>
+    <mat-form-field>
+        <mat-label>Folder's Name</mat-label>
+        <input matInput [placeholder]="'Enter Name for Folder'" required [(ngModel)]="fol.name">
+    </mat-form-field>
+    <br><br>
+    <mat-form-field>
+        <mat-label>Folder's Description</mat-label>
+        <textarea matInput [placeholder]="'Describe ur Folder'" required [(ngModel)]="fol.description"></textarea>
+    </mat-form-field>
+    <br><br>
+    <button mat-raised-button color="warn" mat-dialog-close [disabled]="!check()" cdkFocusInitial>Done</button>
+    <span>&nbsp;</span> <span>&nbsp;</span>
+    <button mat-raised-button color="primary" mat-dialog-close (click)="cancel()" cdkFocusInitial>Cancel</button>
+</div>
