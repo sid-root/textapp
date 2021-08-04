@@ -1,5 +1,4 @@
 <style>
-   
     .center {
         margin: 0;
         position: absolute;
@@ -7,11 +6,18 @@
         left: 50%;
         -ms-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
-      }
-    </style>
+    }
+    .bgimg{
+        background-image: url("../../assets/7325.jpg");
+         height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover; 
+    }
+</style>
 
-<body>
-<div class="center">
+<body class="bgimg">
+<div class="center" style="opacity: 0.9;">
     <p-panel>
     <p-header style="font-size: large; font-weight: bold; color: rgb(21, 177, 164);">LOGIN</p-header>
     <div *ngIf = "!correct">
@@ -19,21 +25,24 @@
             User Id or Password is incorrect
         </h4>
     </div>
-    <form [formGroup]="form" (ngSubmit) = "check()">
+    <form [formGroup]="form" (ngSubmit) = "Authenticate()">
         <div>
             <label for="User Id" style="font-weight: bold;">User Id</label><br><br>
-            <input id="User Id" type="text" pInputText formControlName= "user_id"> 
+            <input id="User Id" type="text" pInputText formControlName= "user_id" size="40"> 
             <div *ngIf="!form.get('user_id').valid && submitted" style="color: red;" >User Id is required</div>
         </div>
         <br>
         <div>
             <label for="User Id" style="font-weight: bold;">Password</label><br><br>
-            <input id="User Id" type="password" pInputText formControlName= "password"> 
+            <input id="User Id" type="password" pInputText formControlName= "password" size="40"> 
             <div *ngIf="!form.get('password').valid && submitted" style="color: red;" >Password is required</div>
         </div>
         <br>
         <span><button pButton type="submit" label="Submit"></button></span>
         <span><p-button label="Signup" styleClass="p-button-link" routerLink="/signup"></p-button></span>
+        <span>
+            <p-button label="Forgot Password ?" styleClass="p-button-link" routerLink="/forgotpassword" ></p-button>
+        </span>
     </form>
     </p-panel>
 </div>

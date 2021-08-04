@@ -3,6 +3,8 @@ export class User{
     // name: string;
     password: string;
     groups: string[]=[];
+    resetlink: string;
+    email: string
 }
 
 export class Group{

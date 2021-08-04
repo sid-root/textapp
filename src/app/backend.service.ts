@@ -21,6 +21,9 @@ export class BackendService {
 
   currentuser_id = this.user_id.asObservable();
   currentpassword = this.password.asObservable();
+  serveradr='http://localhost:3000/api/';
+  visit_reset_pass= true;
+  token: any;
 
   update_user_id(message: string) {
     this.user_id.next(message)
@@ -39,10 +42,11 @@ export class BackendService {
   }
 
   getacc(uid:string): Observable<User>{
-    return this.http.get<User>('http://localhost:3000/api/accs/'+uid);
+    return this.http.get<User>('http://localhost:3000/api/accs/'+uid).pipe();
   }
 
   addaccount(user:User): Observable<User>{
+    console.log("addaccount called in backend service");
     return this.http.post<User>('http://localhost:3000/api/sign_in', user).pipe();
   }
 
@@ -56,14 +60,6 @@ export class BackendService {
     return grpid;
   }
 
-  addpost(gid:string, folid:string, post:Post){
-    return this.http.put('http://localhost:3000/api/addpost/'+gid+'/'+folid, post);
-  }
-
-  addfolder(gid:string, folder:Folder){
-    return this.http.put('http://localhost:3000/api/addfol/'+gid+'/'+folder.id,folder);
-  }
-
   getgroups(gid:string): Observable<Group>{
     return this.http.get<Group>('http://localhost:3000/api/group/'+gid).pipe();
   }
@@ -72,14 +68,20 @@ export class BackendService {
     this.http.get<Group[]>('http://localhost:3000/api/groupsbyuser/'+uid).pipe();
   }
 
-  addfolder2( grp:Group): Observable<Group>{
-    return this.http.put<Group>('http://localhost:3000/api/addfol2',grp).pipe();
+  sendotp(otp: string, email: string){
+    return this.http.post('http://localhost:3000/api/sendotp', {otp: otp, email: email}).pipe();
   }
 
-  updategrparray(user: User,group: Group){
-    return this.http.put('http://localhost:3000/api/updategrparray/'+user.id, {user:user,group:group});
+  forgotpassword(email: string, url: string){
+    return this.http.put(this.serveradr+"forgotpassword",{email: email, url: url}).pipe();
   }
 
-  // getgroups2
+  resetpassword(newpassword, token){
+    return this.http.put(this.serveradr+"resetpassword",{token: token, newpassword: newpassword}).pipe();
+  }
+
+  authenticate(userid: string, email:string){
+    return this.http.post<{message: string}>(this.serveradr + "authenticate", {userid: userid, email: email}).pipe();
+  }
 
 }

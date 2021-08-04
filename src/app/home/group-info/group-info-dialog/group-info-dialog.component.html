@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>Add Users</h1>
 <div mat-dialog-content>
     <p-listbox [options]="data.nongroupusers" [(ngModel)]="data.userstobeadded" [metaKeySelection]="false" [checkbox]="true"
-        [filter]="true" [multiple]="true" optionLabel="name" [listStyle]="{'max-height':'250px'}" [style]="{'width':'15rem'}">
+        filter="filter" multiple="true" optionLabel="name" [listStyle]="{'max-height':'250px'}" [style]="{'width':'15rem'}">
         <ng-template let-user pTemplate="item">
           <div class="user-item">
             <div>{{user}}</div>
@@ -10,7 +10,7 @@
     </p-listbox>
     <br>
     <br>
-    <button mat-raised-button color="warn" [disabled]="!check()" (click)="dojob()" cdkFocusInitial>Done</button>
+    <button mat-raised-button color="warn" [disabled]="!check()" (click)="dojob()" cdkFocusInitial style="vertical-align: bottom  ;">Done</button>
     <span>&nbsp;</span> <span>&nbsp;</span>
-    <button mat-raised-button color="primary" mat-dialog-close (click)="cancel()" cdkFocusInitial>Cancel</button>
+    <button mat-raised-button color="primary" mat-dialog-close (click)="cancel()" cdkFocusInitial style="vertical-align: bottom;">Cancel</button>
 </div>

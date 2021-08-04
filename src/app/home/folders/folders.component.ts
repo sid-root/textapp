@@ -58,7 +58,6 @@ export class FoldersComponent implements OnInit {
   }
 
   constructor(private dialog:MatDialog, public bs: BackendService, private ws: WebsocketService) {
-   
   }
 
   ngOnInit(): void {    

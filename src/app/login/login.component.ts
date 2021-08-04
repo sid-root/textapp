@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   password: string;
   acc: User;
 
-  check(){
+  Authenticate(){
     this.submitted = true;
     this.ss.checkaccount(this.form.get('user_id').value, this.form.get('password').value).subscribe(account => {this.acc = account
     if(!account){

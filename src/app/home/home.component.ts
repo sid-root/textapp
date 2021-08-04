@@ -26,6 +26,29 @@ export class HomeComponent implements OnInit {
 
 
   constructor(public bs: BackendService, private dialog: MatDialog, private route: ActivatedRoute, private router: Router, private ws: WebsocketService) {
+    this.userid = this.route.snapshot.params['uid'];
+    // console.log(this.userid);
+
+    this.bs.getacc(this.userid).subscribe(res => {
+      this.currentuser=res;
+      console.log(res);
+      var i:any
+      // console.log(this.currentuser);
+      if(this.currentuser){
+      for(i in this.currentuser.groups){
+        this.bs.getgroups(this.currentuser.groups[i]).subscribe(grp => {
+          this.groups.push(grp);
+          this.ws.joingroup(grp);
+          var k: any;
+          for(k in grp.folders){
+            this.ws.joinfolder(grp._id,grp.folders[k]);
+            // console.log("Joined room(folder): "+grp._id+grp.folders[k].id);
+          }
+        });
+      }
+    }
+    }); 
+
     this.ws.newfolderadded().subscribe(data => {
       console.log("Checking web socket newfolderadded");
       console.log(data);
@@ -91,9 +114,7 @@ export class HomeComponent implements OnInit {
     for (sgroup of this.groups){
       if (sgroup.name.indexOf(this.srch)>=0&&this.sgroups.indexOf(sgroup)<0){
         this.sgroups.push(sgroup);
-      }
-      // this.sgroups.splice(this.sgroups.length-1,1);
-     
+      }     
     }
   }
 
@@ -106,7 +127,6 @@ export class HomeComponent implements OnInit {
     }
     else{
       this.bs.search=true;
-      // this.sgroups=this.groups;
       this.sgroups=[];
       console.log(this.sgroups);
       this.ls();
@@ -156,25 +176,5 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    this.userid = this.route.snapshot.params['uid'];
-    // console.log(this.userid);
-
-    this.bs.getacc(this.userid).subscribe(res => {
-      this.currentuser=res[0];
-      // console.log(this.currentuser.id);
-      var i:any
-      for(i in this.currentuser.groups){
-        this.bs.getgroups(this.currentuser.groups[i]).subscribe(grp => {
-          this.groups.push(grp);
-          this.ws.joingroup(grp);
-          var k: any;
-          for(k in grp.folders){
-            this.ws.joinfolder(grp._id,grp.folders[k]);
-            // console.log("Joined room(folder): "+grp._id+grp.folders[k].id);
-          }
-        });
-      }
-    });
   }
 }

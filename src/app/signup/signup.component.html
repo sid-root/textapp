@@ -1,7 +1,10 @@
 <style>
     .bgimg{
-        background-image: url('E:\op\src\app\login\pic_1.jpg');
-        /* background-repeat: no-repeat; */
+        background-image: url("../../assets/7325.jpg");
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
     }
     .center {
         margin: 0;
@@ -13,29 +16,64 @@
       }
     </style>
 <body class="bgimg">
-    <div class="center">
-        <p-panel>
+    <div class="center" style="opacity: 0.9;">
+        <p-panel >
         <p-header style="font-size: large; font-weight: bold; color: rgb(21, 177, 164);">SIGNUP</p-header>
         <div *ngIf = "!valid">
             <h3 style="color: crimson; left: 50%;">
-                User Id is already taken
+                User Id already registered
             </h3>
         </div>
         <form [formGroup]="form" (ngSubmit) = "check()">
-            <div>
+            <span style="display: inline-block;">
                 <label for="User Id" style="font-weight: bold;">User Id</label><br><br>
                 <input id="User Id" type="text" pInputText formControlName= "user_id"> 
                 <div *ngIf="!form.get('user_id').valid && submitted" style="color: red;" >User Id is required</div>
-            </div>
-            <br>
-            <div>
+            </span>
+            <span>&nbsp;</span>
+            <span>&nbsp;</span>
+            <span>&nbsp;</span>
+            <span>&nbsp;</span>
+            <span>&nbsp;</span>
+            <span>&nbsp;</span>
+            <span style="display: inline-block;">
                 <label for="User Id" style="font-weight: bold;">Password</label><br><br>
                 <input id="User Id" type="password" pInputText formControlName= "password"> 
                 <div *ngIf="!form.get('password').valid && submitted" style="color: red;" >Password is required</div>
+            </span>
+            <br>
+            <br>
+            <span style="display: inline-block;">
+                <label for="User Id" style="font-weight: bold; opacity: 1;">Email Id</label><br><br>
+                <input id="User Id" type="email" pInputText formControlName= "email"> 
+                <div *ngIf="!form.get('email').valid && submitted" style="color: red;" >Email Id is required</div>
+            </span>
+            &nbsp;
+            &nbsp;
+            <span>
+            <p-button label="Send OTP" styleClass="p-button-link" (click)="sendotp()"></p-button>
+            </span>
+            <br>
+            <br>
+            <div *ngIf="!emailvalid">
+                <h3 style="color: crimson; left: 50%;">
+                    Email already registered
+                </h3>
             </div>
             <br>
-            <span><button pButton type="submit" label="Submit"></button></span>
-            <span><p-button label="Login" styleClass="p-button-link" routerLink="/login"></p-button></span>
+            <div>
+                <label for="User Id" style="font-weight: bold;">OTP</label><br><br>
+                <input id="User Id" type="text" pInputText formControlName= "otp"> 
+                <div *ngIf="!form.get('otp').valid && submitted" style="color: red;" >OTP is required</div>
+            </div>
+            <div *ngIf = "!otpauth">
+                <h3 style="color: crimson; left: 50%;">
+                    Wrong OTP entered
+                </h3>
+            </div>
+            <br>
+            <span><button pButton type="submit" label="Submit" (click)="check()" ></button></span>
+            <span><p-button label="Login" styleClass="p-button-link" routerLink="/login" ></p-button></span>
         </form>
         </p-panel>
     </div>

@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthguardGuard } from './authguard.guard';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
@@ -26,6 +28,17 @@ const routes: Routes = [
     path: 'home/:uid',
     component: HomeComponent,
     canActivate: [AuthguardGuard]
+  },
+
+  {
+    path: 'forgotpassword',
+    component: ForgotpasswordComponent
+  },
+
+  {
+    path: 'resetpassword/:id/:token',
+    component: ResetpasswordComponent
+    // canActivate: [AuthGuard]
   }
 ];
 

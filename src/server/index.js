@@ -19,6 +19,7 @@ const io = require('socket.io')(server, {
 
 
 mongoose.connect('mongodb://127.0.0.1/textapp');
+mongoose.set('useCreateIndex', true);
 
 mongoose.connection.on('connected', () =>{
     console.log('Connected to Database!');

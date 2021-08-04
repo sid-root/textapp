@@ -52,7 +52,10 @@ export class GroupInfoComponent implements OnInit {
         data:{
         userstobeadded:userstobeadded,
         nongroupusers:nongroupusers
-        }
+        },
+        height:'auto',
+        width:"35%",
+        maxHeight:"80%",
       });
 
       dialogref.afterClosed().subscribe(res => {

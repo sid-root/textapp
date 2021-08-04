@@ -50,6 +50,8 @@ import { FoldersComponent } from './home/folders/folders.component';
 import { AddfolderdlgComponent } from './home/folders/addfolderdlg/addfolderdlg.component';
 import { WebsocketService } from './websocket.service';
 import { GroupInfoDialogComponent } from './home/group-info/group-info-dialog/group-info-dialog.component';
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 
 
 @NgModule({
@@ -62,7 +64,9 @@ import { GroupInfoDialogComponent } from './home/group-info/group-info-dialog/gr
     GroupInfoComponent,
     FoldersComponent,
     AddfolderdlgComponent,
-    GroupInfoDialogComponent
+    GroupInfoDialogComponent,
+    ResetpasswordComponent,
+    ForgotpasswordComponent
   ],
   imports: [
     AccordionModule,
